@@ -28,7 +28,7 @@ public class Item {
         return link;
     }
 
-    public String getType() {
-        return type.toString();
+    public ItemType getType() {
+        return type;
     }
 }
