@@ -53,5 +53,7 @@ public class Recommender {
                 similarityMatrix.put(itemsMap, similarity);
             }
         }
+
+        return;
     }
 }

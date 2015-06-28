@@ -28,11 +28,11 @@ public class SimilarityMysqlPersister extends MysqlPersister {
         Set<User> result = new HashSet<>();
         String sql = "" +
             "SELECT " +
-                "i.id, " +
+                "user_id " +
             "FROM likes " +
             "WHERE " +
-                "likes.item_id = ? " +
-                "AND likes.item_type = ?";
+                "item_id = ? " +
+                "AND item_type = ?";
 
         try  {
             Connection mysqlConnection = MysqlConnection.getConnection();
@@ -93,7 +93,7 @@ public class SimilarityMysqlPersister extends MysqlPersister {
         Map<User, Integer> result = new HashMap<>();
         String sql = "" +
             "SELECT " +
-                "DISsNCT user_id, " +
+                "DISTINCT user_id, " +
                 "COUNT(*) AS likes_count " +
             "FROM likes " +
             "WHERE " +
@@ -134,14 +134,14 @@ public class SimilarityMysqlPersister extends MysqlPersister {
         Map<Item, Integer> result = new HashMap<>();
         String sql = "" +
             "SELECT " +
-                "DISTINCT item_id, " +
+                "DISTINCT likes.item_id, " +
                 "i.name, " +
-                "i.link " +
+                "i.link, " +
                 "COUNT(*) AS likes_count " +
             "FROM likes " +
             join.toString() +
             "WHERE " +
-                "type = ? " +
+                "likes.item_type = ? " +
             "GROUP BY item_id";
 
         try  {

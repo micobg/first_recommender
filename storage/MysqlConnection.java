@@ -4,6 +4,7 @@ import config.MysqlConfig;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class MysqlConnection {
 
@@ -30,18 +31,19 @@ public class MysqlConnection {
      *
      * @return Connection object
      */
-    private static Connection initConnection() {
+    private static Connection initConnection(){
         Connection connection = null;
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/" + MysqlConfig.DB_NAME.toString() + "?characterEncoding=UTF-8" +
-                            "&user=" + MysqlConfig.DB_USER.toString() +
-                            "&password=" + MysqlConfig.DB_PASS.toString()
+                "jdbc:mysql://localhost:3306/" + MysqlConfig.DB_NAME.toString() + "?characterEncoding=UTF-8" +
+                "&user=" + MysqlConfig.DB_USER.toString() +
+                "&password=" + MysqlConfig.DB_PASS.toString()
             );
-        } catch (/*SQL*/Exception e) {
-            // TODO: fix exception handling
+        } catch (SQLException ex) {
+            System.err.println("Cannot connect ot database.");
+        } catch (ClassNotFoundException ex) {
             System.err.println("Cannot connect ot database.");
         }
 

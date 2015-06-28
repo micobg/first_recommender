@@ -2,7 +2,7 @@ package models;
 
 import persisters.ItemType;
 
-public class Item {
+public class Item implements Comparable<Item> {
 
     protected Integer id = null;
     protected String name = null;
@@ -30,5 +30,29 @@ public class Item {
 
     public ItemType getType() {
         return type;
+    }
+
+    @Override
+    public int compareTo(Item item) {
+        return equals(item) ? 0 : 1;
+    }
+
+    @Override
+    public boolean equals(Object aThat) {
+        if (this == aThat) {
+            return true;
+        }
+
+        if (!(aThat instanceof Item)) {
+            return false;
+        }
+
+        Item that = (Item)aThat;
+        return this.id.equals(that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
     }
 }

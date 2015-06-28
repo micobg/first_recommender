@@ -26,7 +26,7 @@ public class MysqlPersister {
         Set<Item> result = new HashSet<>();
         String sql = "" +
             "SELECT " +
-                "i.id, " +
+                "DISTINCT i.id, " +
                 "i.name, " +
                 "i.link " +
             "FROM likes " +
@@ -79,7 +79,7 @@ public class MysqlPersister {
         Set<Item> result = new HashSet<>();
         String sql = "" +
             "SELECT " +
-                "i.id, " +
+                "DISTINCT i.id, " +
                 "i.name, " +
                 "i.link " +
             "FROM likes " +
